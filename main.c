@@ -1,80 +1,42 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#define size 2
 
-int hash[size];
-int i,hasil=-1;
-struct Database {
-    int b;
-    int c;
-    int pin1[50];
-    int pin;
-    int d;
-   long long nomer;
-   char score[size];
-} data[50], curr;
+int mainmenu, menukirim, menuterima;
 
+int main(){
 
+printf ("MAIN MENU\n");
+printf ("1. Menu Kirim\n2. Menu Terima\n");
+printf ("Masukan Pilihan : ");
+scanf("%d", &mainmenu);
 
-void init()
-{
-    int i;
-    for(i = 0; i < size; i++)
-        hash[i] = -1;
+switch (mainmenu) {
+
+case 1 :
+    system("cls");
+    printf("Menu Kirim\n");
+    printf("1. Input Paket\n2. Cari Paket\n3. Load Paket\n");
+    printf ("Masukan Pilihan : ");
+    scanf("%d", &menukirim);
+
+    switch (menukirim){
+    case 1 :
+        printf("Masukan Nama Barang : ");
+        scanf("%s", barang);
+        printf("\n Masukan Alamat Tujuan : ");
+        scanf("%s", alamat);
+        printf("\n Masukan Nama Penerima");
+        scanf("%s", penerima);
+    }
+    break;
+
+case 2 :
+    system("cls");
+    printf("Menu Terima\n");
+    printf("1. Terima Paket\n2. Distribusi Paket\n");
+    printf ("Masukan Pilihan : ");
+    scanf("%d", &menuterima);
+
+    break;
 }
-
-void insert(int value)
-{
-    int key = value % size;
-
-    if(hash[key] == -1)
-    {
-        hash[key] = value;
-        printf("\n");
-    }
-    else
-    {
-        printf("Collision : hash[%d] has element %d already!\n",key,hash[key]);
-        printf("Unable to insert %d\n",value);
-    }
-}
-
-void search(int value)
-{
-    int key = value % size;
-    if(hash[key] == value) {
-        printf("Nomor terverifikasi\n");
-    }
-    else {
-        printf("Nomor anda tidak terdata\n");
-        return main();
-    }
-}
-
-int inspin()
-{
-    printf("Masukkan Pin Anda : ");
- scanf("%s",&data->pin);
- printf("====================================\n");
- if(hasil == 0 ){
-     printf("PIN benar");
- }
- else {
-     printf("PIN salah");
-     return inspin();
- }
-}
-int main ()
-{
-    int pin1,pin2;
-    FILE *fp;
-    fp = fopen("pin.txt","r");
-    while(!feof(fp)){
-        fscanf(fp,"%lld %d",&data[i].nomer,&data[i].pin1);
-        i++;
-    }
-    for(i=0;i<size;i++){
-    printf("%lld %d\n",data[i].nomer,data[i].pin1);
-    }
+return 0;
 }
