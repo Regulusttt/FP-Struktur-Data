@@ -81,7 +81,6 @@ void Qenqueue(){
     else if (QisFull()==0){
         q.tail++;
         q.data[q.tail]=barang[i];
-        printf("%s Masuk\n", q.data[i].resi);
     }
 i++;
 }
