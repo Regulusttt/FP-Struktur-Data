@@ -207,4 +207,5 @@ void rute(){
             printf("Nama Barang     : %s\n", terima.baru[x].jenis);
             printf("Waktu Masuk     : %s\n\n", terima.waktu[x]);
         }
+z=0;
 }
