@@ -10,6 +10,52 @@ static int i=0;
 int z=0;
 char filename_string[20];
 
+    struct barang{
+    char pengirim[50], penerima[50], alamat[50];
+    char resi[10];
+    char jenis[50];
+}barang[30];
+
+typedef struct {
+    struct barang data[30];
+    int head, tail;
+} Queue;
+Queue q;
+
+typedef struct {
+    struct barang data[10];
+    int top;
+}Stack;
+Stack s;
+
+typedef struct{
+    struct barang data[10];
+}Temp;
+Temp temp;
+
+struct barangbaru{
+    struct barang baru[30];
+    char waktu[30][10];
+}terima,curr;
+
+void isi(){
+        jumdat++;
+        for (;i<jumdat;){
+            printf("Masukan Nomor Resi      : ");
+            scanf("%s", barang[i].resi);
+            printf("Masukan Nama Pengirim   : ");
+            scanf("%s", barang[i].pengirim);
+            printf("Masukan Nama Penerima   : ");
+            scanf("%s", barang[i].penerima);
+            printf("Masukan Alamat Penerima : ");
+            scanf("%s", barang[i].alamat);
+            printf("Masukan Nama Barang     : ");
+            scanf("%s", barang[i].jenis);
+            printf ("\n");
+            Qenqueue();
+        }
+}
+
 int waktuterima() {
 time_t t = time(NULL);
     struct tm local_time = *localtime(&t);
@@ -42,38 +88,6 @@ void header(){
     puts("Putu Bagus Dio Pranata                   2008561100 ");
     puts("====================================================\n");
 }
-
-struct barang{
-    char pengirim[50], penerima[50], alamat[50];
-    char resi[10];
-    char jenis[50];
-}barang[30];
-
-typedef struct {
-    struct barang data[30];
-    int head, tail;
-} Queue;
-Queue q;
-
-typedef struct {
-    struct barang data[10];
-    int top;
-}Stack;
-Stack s;
-
-typedef struct{
-    struct barang data[10];
-}Temp;
-Temp temp;
-
-struct waktuwaktu{
-    char waktu[20];
-}Waktu[20];
-
-struct barangbaru{
-    struct barang baru[30];
-    char waktu[30][10];
-}terima,curr;
 
 void Qcreate(){
 q.head=q.tail=-1;
@@ -147,7 +161,7 @@ y=s.top;
         strcpy(terima.waktu[x],filename_string);
         z++;
         s.top--;
-        printf("Paket dengan nomor resi %s sudah dikeluarkan\n", terima.baru[x].resi);
+        printf("Paket dengan nomor resi %s sudah dikeluarkan dari truk\n", terima.baru[x].resi);
         getch();
     }
 }
@@ -211,6 +225,19 @@ void sorting(){
       }
 }
 
+void rute(){
+    puts ("Urutan Paket yang perlu dikirim : \n");
+        for(int x=0;x<z;x++){
+            printf("Nomor Resi      : %s\n", terima.baru[x].resi);
+            printf("Nama Pengirim   : %s\n", terima.baru[x].pengirim);
+            printf("Nama Penerima   : %s\n", terima.baru[x].penerima);
+            printf("Alamat Penerima : %s\n", terima.baru[x].alamat);
+            printf("Nama Barang     : %s\n", terima.baru[x].jenis);
+            printf("Waktu Masuk     : %s\n\n", terima.waktu[x]);
+        }
+z=0;
+}
+
 int main(){
 int partai = 0;
 char ulang;
@@ -241,21 +268,7 @@ case 1 :
     case 1 :
         isi:
         clear();
-        jumdat++;
-        for (;i<jumdat;){
-            printf("Masukan Nomor Resi      : ");
-            scanf("%s", barang[i].resi);
-            printf("Masukan Nama Pengirim   : ");
-            scanf("%s", barang[i].pengirim);
-            printf("Masukan Nama Penerima   : ");
-            scanf("%s", barang[i].penerima);
-            printf("Masukan Alamat Penerima : ");
-            scanf("%s", barang[i].alamat);
-            printf("Masukan Nama Barang     : ");
-            scanf("%s", barang[i].jenis);
-            printf ("\n");
-            Qenqueue();
-        }
+        isi();
         puts("Paket berhasil diinput");
         getch();
         goto kirim;
@@ -319,15 +332,7 @@ switch(menuterima){
 
     case 2:
         sorting();
-        puts ("Urutan Paket yang perlu dikirim : \n");
-        for(int x=0;x<z;x++){
-            printf("Nomor Resi      : %s\n", terima.baru[x].resi);
-            printf("Nama Pengirim   : %s\n", terima.baru[x].pengirim);
-            printf("Nama Penerima   : %s\n", terima.baru[x].penerima);
-            printf("Alamat Penerima : %s\n", terima.baru[x].alamat);
-            printf("Nama Barang     : %s\n", terima.baru[x].jenis);
-            printf("Waktu Masuk     : %s\n\n", terima.waktu[x]);
-        }
+        rute();
         getch();
         goto acc;
         break;
