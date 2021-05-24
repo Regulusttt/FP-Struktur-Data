@@ -106,6 +106,7 @@ switch(menuterima){
         sorting();
         rute();
         getch();
+        getch();
         goto acc;
         break;
 
