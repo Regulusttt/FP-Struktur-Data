@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#define MAX 10
+#include <conio.h>
 #include <time.h>
+#define MAX 10
 
 int jumdat=0;
 static int i=0;
@@ -17,7 +19,29 @@ time_t t = time(NULL);
     int second = local_time.tm_sec;
 
     sprintf(filename_string, "%02d:%02d:%02d", hour, minute, second);
-    return 0; }
+    return 0;
+}
+
+void clear() {
+    #ifdef _WIN32
+        system("cls");
+    #elif __linux__
+        system("clear");
+    #endif
+}
+
+void header(){
+    puts("====================================================");
+    puts("            Final Project Struktur Data             ");
+    puts("                      Case 3                        ");
+    puts("                   Kelompok 5E                      ");
+    puts("====================================================");
+    puts("Muhammad Arrysatrya Yusuf Putranda       2008561097 ");
+    puts("I Made Teja Sarmandana                   2008561098 ");
+    puts("Revi Valen Sumendap                      2008561099 ");
+    puts("Putu Bagus Dio Pranata                   2008561100 ");
+    puts("====================================================\n");
+}
 
 struct barang{
     char pengirim[50], penerima[50], alamat[50];
@@ -43,7 +67,7 @@ typedef struct{
 Temp temp;
 
 struct waktuwaktu{
-    char waktu[20]
+    char waktu[20];
 }Waktu[20];
 
 struct barangbaru{
@@ -61,6 +85,13 @@ void Screate(){
 
 int QisEmpty(){
     if(q.tail==-1)
+        return 1;
+    else
+        return 0;
+}
+
+int SisEmpty(){
+    if(s.top==-1)
         return 1;
     else
         return 0;
@@ -89,7 +120,7 @@ void Swap(){
 int x;
 int c=0;
     if(s.top==MAX-1){
-        puts("Mobil Sudah Penuh! Silahkan Kirim Mobil ke Gudang Tujuan!");
+        puts("Truk sudah penuh! Silahkan kirim truk ke gudang tujuan!");
     }
     else while(c<=10 && q.head <= q.tail) {
         x=q.head;
@@ -103,7 +134,6 @@ int c=0;
 	    q.tail--;
 	    c++;
     }
-        return temp.data[x];
 
 }
 
@@ -111,40 +141,38 @@ void pop(){
 int x;
 int y;
 y=s.top;
-
-
-        for (x=0;x<=y;x++){
+    for (x=0;x<=y;x++){
         waktuterima();
         terima.baru[x] = s.data[s.top];
         strcpy(terima.waktu[x],filename_string);
         z++;
         s.top--;
+        printf("Paket dengan nomor resi %s sudah dikeluarkan\n", terima.baru[x].resi);
         getch();
-        }
-
+    }
 }
 
 void Sdisplay(){
-    puts("Data Stack : ");
+    puts("\nPaket Dalam Truk : ");
     for (int x=s.top;x>=0;x--){
-        printf("Nomor Resi : %s\n", s.data[x].resi);
-        printf("Nama Pengirim : %s\n", s.data[x].pengirim);
-        printf("Nama Penerima : %s\n", s.data[x].penerima);
-        printf("Alamat Penerim : %s\n", s.data[x].alamat);
-        printf("Nama Barang : %s\n", s.data[x].jenis);
+        printf("Nomor Resi      : %s\n", s.data[x].resi);
+        printf("Nama Pengirim   : %s\n", s.data[x].pengirim);
+        printf("Nama Penerima   : %s\n", s.data[x].penerima);
+        printf("Alamat Penerima : %s\n", s.data[x].alamat);
+        printf("Nama Barang     : %s\n", s.data[x].jenis);
         printf("\n");
     }
 }
 
 void Qdisplay(){
     if(QisEmpty()==0){
-    puts("Data Queue : ");
+    puts("Data Paket Gudang : ");
     for (int x=q.head;x<=q.tail;x++){
-        printf("Nomor Resi : %s\n", q.data[x].resi);
-        printf("Nama Pengirim : %s\n", q.data[x].pengirim);
-        printf("Nama Penerima : %s\n", q.data[x].penerima);
-        printf("Alamat Penerim : %s\n", q.data[x].alamat);
-        printf("Nama Barang : %s\n", q.data[x].jenis);
+        printf("Nomor Resi      : %s\n", q.data[x].resi);
+        printf("Nama Pengirim   : %s\n", q.data[x].pengirim);
+        printf("Nama Penerima   : %s\n", q.data[x].penerima);
+        printf("Alamat Penerima : %s\n", q.data[x].alamat);
+        printf("Nama Barang     : %s\n", q.data[x].jenis);
         printf("\n");
     }
 }
@@ -160,15 +188,15 @@ void search(){
     for(x=0;x<jumdat;x++){
         if (strcmp(barang[x].resi, cari)==0)
         {
-            printf("Resi Ditemukan\n");
-            printf("Nomor Resi : %s\n", barang[x].resi);
-            printf("Nama Pengirim : %s\n", barang[x].pengirim);
-            printf("Nama Penerima : %s\n", barang[x].penerima);
+            puts("Resi Ditemukan\n");
+            printf("Nomor Resi      : %s\n", barang[x].resi);
+            printf("Nama Pengirim   : %s\n", barang[x].pengirim);
+            printf("Nama Penerima   : %s\n", barang[x].penerima);
             printf("Alamat Penerima : %s\n", barang[x].alamat);
-            printf("Nama Barang : %s\n", barang[x].jenis);
+            printf("Nama Barang     : %s\n", barang[x].jenis);
             break;
         }
-        else printf("Resi Tidak Ditemukan");
+        else puts("Resi Tidak Ditemukan");
     }
 }
 
@@ -184,14 +212,15 @@ void sorting(){
 }
 
 int main(){
-int counter = 0;
+int partai = 0;
 char ulang;
 int mainmenu,menukirim,menuterima;
 Qcreate();
 Screate();
 
 menu:
-system("cls");
+clear();
+header();
 printf ("MAIN MENU\n");
 printf ("1. Menu Kirim\n2. Menu Terima\n3. Exit\n");
 printf ("Masukan Pilihan : ");
@@ -202,7 +231,7 @@ switch (mainmenu) {
 
 case 1 :
     kirim :
-    system("cls");
+    clear();
     printf("Menu Kirim\n");
     printf("1. Input Paket\n2. Cari Paket\n3. Load Paket\n4. Kembali ke Menu Utama\n");
     printf ("Masukan Pilihan : ");
@@ -211,23 +240,23 @@ case 1 :
     switch (menukirim){
     case 1 :
         isi:
-        system("cls");
+        clear();
         jumdat++;
         for (;i<jumdat;){
-            printf("Masukan Nomor Resi: ");
+            printf("Masukan Nomor Resi      : ");
             scanf("%s", barang[i].resi);
-            printf("Masukan Nama Pengirim: ");
+            printf("Masukan Nama Pengirim   : ");
             scanf("%s", barang[i].pengirim);
-            printf("Masukan Nama Penerima: ");
+            printf("Masukan Nama Penerima   : ");
             scanf("%s", barang[i].penerima);
-            printf("Masukan Alamat : ");
+            printf("Masukan Alamat Penerima : ");
             scanf("%s", barang[i].alamat);
-            printf("Masukan Nama Barang : ");
+            printf("Masukan Nama Barang     : ");
             scanf("%s", barang[i].jenis);
             printf ("\n");
             Qenqueue();
         }
-        puts("Paket Berhasil Diinput");
+        puts("Paket berhasil diinput");
         getch();
         goto kirim;
         break;
@@ -241,11 +270,19 @@ case 1 :
         break;
 
     case 3 :
+    if (partai==3){
+        puts("Maksimal partai per-hari sudah melebihi kuota!");
+        getch();
+    } else if (QisEmpty()==1){
+        puts("Tidak ada paket di gudang yang dapat diload ke Truk");
+        getch();
+    } else {
         Swap();
         Qdisplay();
         Sdisplay();
         puts("Tekan Enter Untuk Kembali");
         getch();
+    }
         goto kirim;
         break;
 
@@ -257,19 +294,41 @@ break;
 
 case 2 :
     acc:
-    system("cls");
+    clear();
     printf("Menu Terima\n");
-    printf("1. Terima Paket\n2. Distribusi Paket\n3. Kembali ke Menu Utama");
+    printf("1. Terima Paket\n2. Distribusi Paket\n3. Kembali ke Menu Utama\n");
     printf ("Masukan Pilihan : ");
     scanf("%d", &menuterima);
 switch(menuterima){
     case 1:
-        Swap();
+    if (partai==3){
+        puts("Maksimal partai per-hari sudah melebihi kuota!");
+        getch();
+    }
+    else if (SisEmpty()==1){
+        puts("Tidak ada paket didalam Truk");
+        getch();
+    } else {
+        pop();
+        puts("\nSemua paket didalam truk sudah dikeluarkan");
+        getch();
+        partai++;
+    }
         goto acc;
         break;
 
     case 2:
         sorting();
+        puts ("Urutan Paket yang perlu dikirim : \n");
+        for(int x=0;x<z;x++){
+            printf("Nomor Resi      : %s\n", terima.baru[x].resi);
+            printf("Nama Pengirim   : %s\n", terima.baru[x].pengirim);
+            printf("Nama Penerima   : %s\n", terima.baru[x].penerima);
+            printf("Alamat Penerima : %s\n", terima.baru[x].alamat);
+            printf("Nama Barang     : %s\n", terima.baru[x].jenis);
+            printf("Waktu Masuk     : %s\n\n", terima.waktu[x]);
+        }
+        getch();
         goto acc;
         break;
 
