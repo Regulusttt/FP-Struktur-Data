@@ -89,7 +89,6 @@ int QisFull(){
     else
         return 0;
 }
-
 void Qenqueue(){
     if(QisEmpty()==1){
         q.head=q.tail=0;
@@ -105,10 +104,7 @@ i++;
 void Swap(){
 int x;
 int c=0;
-    if(s.top==MAX-1){
-        puts("Truk sudah penuh! Silahkan kirim truk ke gudang tujuan!");
-    }
-    else while(c<=10 && q.head <= q.tail) {
+    while(c<=10 && q.head <= q.tail) {
         x=q.head;
         s.top++;
         s.data[s.top]=q.data[x];

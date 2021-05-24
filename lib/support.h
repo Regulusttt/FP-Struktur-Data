@@ -17,5 +17,6 @@
     void Qdisplay();
     void search();
     void sorting();
-
+    void rute();
+    void isi();
 #endif

@@ -51,7 +51,11 @@ case 1 :
         break;
 
     case 3 :
-    if (partai==3){
+    if(s.top==MAX-1){
+        puts("Truk sudah penuh! Silahkan kirim truk ke gudang tujuan!");
+        getch();
+    }
+    else if (partai==3){
         puts("Maksimal partai per-hari sudah melebihi kuota!");
         getch();
     } else if (QisEmpty()==1){
