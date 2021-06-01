@@ -163,6 +163,7 @@ void Qdisplay(){
 void search(){
     char cari[10];
     int x;
+    int a=0;
     printf("Masukan Resi : ");
     scanf("%s", cari);
     getchar();
@@ -176,10 +177,13 @@ void search(){
             printf("Nama Penerima   : %s\n", barang[x].penerima);
             printf("Alamat Penerima : %s\n", barang[x].alamat);
             printf("Nama Barang     : %s\n", barang[x].jenis);
+            a=1;
             break;
         }
-        else puts("Resi Tidak Ditemukan");
     }
+            if (a==0) {
+            puts ("Resi Tidak Ditemukan!");
+        }
 }
 
 void sorting(){
